@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karte des LMG</title>
+</head>
+<body>
+    <div id="display"></div>
+    <script defer>
+        const urlParams = new URLSearchParams(window.location.search);
+        document.querySelector('#display').innerHTML = `x: ${urlParams.get('x')} y: ${urlParams.get('y')} map: ${urlParams.get('map')}`
+    </script>
+</body>
+</html>
