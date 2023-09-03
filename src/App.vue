@@ -3,17 +3,24 @@
 </template>
 
 <script>
-
 export default {
   name: "App",
-  components: {
-  },
+  components: {},
 };
 </script>
 
 <style>
+@font-face {
+  font-family: Bahnschrift;
+  src: url("@/assets/fonts/bahnschrift.ttf");
+}
+
+:root {
+  --svgcolor: #fff;
+}
+
 #app {
-  font-family: 'Bahnschrift', Helvetica, Arial, sans-serif;
+  font-family: Bahnschrift, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

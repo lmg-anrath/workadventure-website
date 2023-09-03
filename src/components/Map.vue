@@ -13,6 +13,7 @@
         class="map-switch-element map-switch-element-top"
         :class="[floor === 'OG' ? 'map-switch-active' : null]"
         @click="changeFloor"
+        @touchend="changeFloor"
       >
         OG
       </div>
@@ -20,41 +21,46 @@
         class="map-switch-element map-switch-element-bottom"
         :class="[floor === 'EG' ? 'map-switch-active' : null]"
         @click="changeFloor"
+        @touchend="changeFloor"
       >
         EG
       </div>
     </div>
 
+    <div class="map-reset-view" @click="resetViewport">
+      <img src="@/assets/map-marker.svg" alt="C" width="50" height="50">
+    </div>
+
     <div ref="mapsvg" class="map-view" :style="{ cursor: isPanning ? 'grabbing' : 'grab' }">
       <div
         v-show="floor === cursorPos.floor"
+        ref="mapmarker"
         class="map-marker"
         :style="{ top: `${cursorPos.y}px`, left: `${cursorPos.x}px` }"
       >
         POS: ({{cursorPos.x}},{{cursorPos.y}}) FLOOR: {{cursorPos.floor}}
       </div>
-      <img
-        :src="map"
-        alt=""
-        class="map-svg filter-white"
-        width="6200"
-        height="4250"
-      />
+      <MapImage :floor="floor"/>
     </div>
   </div>
 </template>
 
 <script>
 import panzoom from 'panzoom';
+import MapImage from './MapImage.vue'
 export default {
   name: 'Map',
   data() {
     return {
+      pan: null,
       cursorPos: { x: 0, y: 0, floor: '' },
-      floor: 'OG',
+      floor: 'EG',
       isIngame: false,
       isPanning: false,
     };
+  },
+  components: {
+    MapImage,
   },
   mounted: function () {
     const posX = this.$route.query.x;
@@ -79,23 +85,24 @@ export default {
       }
     }
 
-    const pan = panzoom(this.$refs.mapsvg, {
+    this.pan = panzoom(this.$refs.mapsvg, {
       maxZoom: 1.75,
       minZoom: 0.25,
       initialZoom: 0.5,
       smoothScroll: false,
       bounds: true,
       boundsPadding: 0.5,
+      zoomDoubleClickSpeed: 1,
     });
 
-    pan.on('pan', (e) => {
-      console.log('panning process', e);
+    this.pan.on('pan', () => {
+      //console.log('panning process', e);
       this.isPanning = true;
-      console.warn(pan.getTransform());
+      //console.warn(pan.getTransform());
     });
 
-    pan.on('panend', (e) => {
-        console.log('pan ended', e);
+    this.pan.on('panend', () => {
+        //console.log('pan ended', e);
         this.isPanning = false;
     });
   },
@@ -107,14 +114,14 @@ export default {
         this.floor = 'EG';
       }
     },
+    resetViewport() {
+      if (this.$refs.mapmarker.style.display==='') {
+        console.log('asa');
+        this.pan.smoothMoveTo(0, 0);
+      }
+    },
   },
   computed: {
-    map() {
-      if (this.floor === 'EG') {
-        return require('@/assets/Karte_EG.svg');
-      }
-      return require('@/assets/Karte_OG.svg');
-    },
   },
 };
 </script>
@@ -133,7 +140,7 @@ export default {
 
 .map-switch {
   position: absolute;
-  top: 10vh;
+  top: 140px;
   left: 20px;
   width: 50px;
   border-radius: 15px;
@@ -169,12 +176,31 @@ export default {
   background: #0f0a;
 }
 
+.map-reset-view {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  bottom: 20px;
+  left: 20px;
+  border-radius: 15px;
+  background: #5555;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.map-reset-view:hover {
+  background: #fffa;
+  color: #000;
+}
+
 .map-header {
   position: absolute;
   width: 100vw;
-  text-align: center;
+  height: 120px;
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
+  text-align: center;
   color: #fff;
   background: #0005;
   backdrop-filter: blur(10px);
@@ -194,14 +220,5 @@ export default {
   height: 100px;
   background: #f0f;
   z-index: 1;
-}
-
-.map-svg {
-  position: relative;
-}
-
-.filter-white {
-  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(258deg)
-    brightness(107%) contrast(101%);
 }
 </style>
