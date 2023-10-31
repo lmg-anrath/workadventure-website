@@ -3166,23 +3166,10 @@
   </svg>
 </template>
 
-<script>
-export default {
-  name: "MapImage",
-  props: {
-    floor: String,
-  },
-};
-</script>
+<script lang="ts" setup>
+import '~/assets/mapimage.sass'
 
-<style scoped>
-path {
-    stroke: var(--svgcolor) !important;
-}
-text {
-    fill: var(--svgcolor) !important;
-}
-tspan{
-    fill: var(--svgcolor) !important;
-}
-</style>
+const props = defineProps({
+    floor: String,
+});
+</script>
