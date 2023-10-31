@@ -84,7 +84,7 @@ import { compile } from '@vue/compiler-dom';
 <template>
     <div class="map-page">
         <div class="map-header">
-            <h1>Karte des <span>LMG</span></h1>
+            <h1>Karte des <nuxt-link to="/map?x=1100&y=1100&map=OG" style="color: #fff; text-decoration: none; cursor: default">LMG</nuxt-link></h1>
             <h3>
                 Hier können Sie die Karte der Schule
                 <span v-if="isIngame">und Ihre Position in dieser</span> sehen.
@@ -110,12 +110,13 @@ import { compile } from '@vue/compiler-dom';
             </div>
         </div>
 
-        <div class="map-reset-view" @click="resetViewport">
+        <div v-if="isIngame" class="map-reset-view" @click="resetViewport">
             <img src="~/assets/map-marker.svg" alt="R" width="50" height="50">
         </div>
 
         <div ref="mapsvg" class="map-view" :style="{ cursor: isPanning ? 'grabbing' : 'grab'}">
             <div
+                v-if="isIngame"
                 v-show="floor === cursorPos.floor"
                 ref="mapmarker"
                 class="map-marker"
