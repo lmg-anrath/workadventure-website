@@ -81,3 +81,7 @@ jobs:
         with:
           folder: .output/public
           token: ${{ secrets.TOKEN }}
+        env:
+          ACCESS_TOKEN: ${{ secrets.TOKEN }}
+          BRANCH: gh-pages
+          REPO: lmg-anrath/workadventure-website
