@@ -3,6 +3,7 @@
 
     import '~/assets/style.sass';
     import '~/assets/map.sass';
+import { compile } from '@vue/compiler-dom';
 
     const pan = ref();
     const cursorPos = ref({ x: 0, y: 0, floor: ''});
@@ -19,8 +20,8 @@
 
         if (posX && posY && map) {
             isIngame.value = true;
-            cursorPos.value.x = parseInt(posX);
-            cursorPos.value.y = parseInt(posY);
+            cursorPos.value.x = parseInt(posX) - 75; // Place cursor center at coordinates
+            cursorPos.value.y = parseInt(posY) - 75;
 
             switch (map) {
                 case 'OG':
@@ -41,13 +42,14 @@
             bounds: true,
             boundsPadding: 0.5,
             zoomDoubleClickSpeed: 1,
+            transformOrigin: {x: 0.5, y: 0.5},
         });
 
         pan.value.on('pan', () => {
             isPanning.value = true;
         });
 
-        pan.value.on('panned', () => {
+        pan.value.on('panend', () => {
             isPanning.value = false;
         });
     });
@@ -63,9 +65,19 @@
         }
     }
 
-    // TODO
     function resetViewport() {
-        console.warn('TODO');
+        const mapSRT = pan.value.getTransform();
+        
+        const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+        const centerX = viewportWidth / 2 - 75 * mapSRT.scale;
+        const centerY = viewportHeight / 2 - 75 * mapSRT.scale;
+
+        pan.value.smoothMoveTo(
+            centerX - (cursorPos.value.x * mapSRT.scale),
+            centerY - (cursorPos.value.y * mapSRT.scale),
+        );
+        console.error(pan.value.getTransform());
     }
 </script>
 
@@ -109,7 +121,9 @@
                 class="map-marker"
                 :style="{ top: `${cursorPos.y}px`, left: `${cursorPos.x}px` }"
             >
-                POS: ({{ cursorPos.x }}, {{ cursorPos.y }}) FLOOR: {{ cursorPos.floor }}
+                <div class="map-marker-dropshadow"/>
+                <img class="map-marker-icon" src="~/assets/map-maker-location.svg" alt="<>" width="100" height="100">
+                <p v-if="false">POS: ({{ cursorPos.x }}, {{ cursorPos.y }}) FLOOR: {{ cursorPos.floor }}</p>
             </div>
             <MapImage :floor="floor"/>
         </div>

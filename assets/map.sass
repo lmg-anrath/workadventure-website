@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Roboto:wght@100;300;400;500;700;900&display=swap')
 
+body, html
+    overflow: hidden
+
 .map-page
     position: absolute
     top: 0
@@ -80,7 +83,22 @@
 
 .map-marker
     position: absolute
-    width: 100px
-    height: 100px
-    background: #f0f
+    width: 150px
+    height: 150px
+    display: flex
+    justify-content: center
+    align-items: center
     z-index: 1
+
+.map-marker-dropshadow
+    position: inherit
+    top: 110px
+    background: radial-gradient(#13131377 70%, transparent)
+    filter: blur(5px)
+    width: 100px
+    height: 30px
+    border-radius: 50%
+    z-index: 2
+
+.map-marker-icon
+    z-index: 3
