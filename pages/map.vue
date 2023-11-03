@@ -3,7 +3,6 @@
 
     import '~/assets/style.sass';
     import '~/assets/map.sass';
-import { compile } from '@vue/compiler-dom';
 
     const pan = ref();
     const cursorPos = ref({ x: 0, y: 0, floor: ''});

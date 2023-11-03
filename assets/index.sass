@@ -3,3 +3,43 @@ body, html
     border: 0
     height: 500vh
     background: #CECECE
+
+.index-bg
+    position: relative
+    top: 0
+    left: 0
+    transition: all 1s
+
+.index-logo
+    position: fixed
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    max-width: 90vw
+
+.play-button
+    position: fixed
+    top: 70vh
+    left: 50%
+    transform: translateX(-50%)
+    border: 2px solid #aaa
+    outline: none
+    font-family: 'Ubuntu', sans-serif
+    font-weight: 600
+    font-size: 1.5em
+    padding: 5px 10px 5px 10px
+    border-radius: 20px
+    background: #fffa
+    backdrop-filter: blur(5px)
+    color: #222
+    transition: all 1s
+    
+.play-button:hover
+    $opacity: 0.5
+    background: rgb(22,56,128)
+    background: linear-gradient(35deg, rgba(22,56,128,$opacity) 0%, rgba(72,77,207,$opacity) 20%, rgba(140,48,173,1) 40%, rgba(218,42,117,$opacity) 60%, rgba(255,120,64,$opacity) 80%, rgba(254,154,58,$opacity) 100%)
+    opacity: 100%
+    -moz-backface-visibility: 50%
+    border: 2px solid #fff
+    color: #fff
+     

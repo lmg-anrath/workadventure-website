@@ -1,8 +1,8 @@
 <template>
   <div class="navbar">
     <div class="navbar-logo-wrapper">
-      <nuxt-link to="/">
-        <img class="navbar-logo" src="https://www.lmg-anrath.de/wp-content/uploads/2017/10/LM-Logo_blau.png" alt="Workadventure LMG">
+      <nuxt-link to="/" class="navbar-logo-text">
+        <img class="navbar-logo" src="/workadventure-lmg-logo.png" alt="Workadventure LMG" draggable="false">
       </nuxt-link>
     </div>
   </div>

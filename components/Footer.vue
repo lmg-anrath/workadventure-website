@@ -2,7 +2,7 @@
   <div class="footer">
     <div class="footer-links">
       <ul>
-        <li><nuxt-link to="#">Impressum</nuxt-link></li>
+        <li><nuxt-link to="/impressum">Impressum</nuxt-link></li>
         <li><nuxt-link to="#">Über</nuxt-link></li>
       </ul>
     </div>
