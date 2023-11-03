@@ -23,7 +23,7 @@
   </div>
   <a href="https://www.lmg-anrath.de/impressum/" class="impressum-link">Weitere Informationen.</a>
 
-  <Footer/>
+  <PageFooter/>
 </template>
 
 <script lang="ts" setup>

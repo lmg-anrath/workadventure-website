@@ -1,94 +1,43 @@
 <template>
     <Navbar />
-    <!-- <ScrollingAnim /> -->
-    <div ref="bg" id="bg-wrap" class="index-bg" style="opacity: 1;">
-        <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
-            <defs>
-                <radialGradient id="Gradient1" cx="50%" cy="50%" fx="0.441602%" fy="50%" r=".5">
-                    <animate attributeName="fx" dur="34s" values="0%;3%;0%" repeatCount="indefinite"></animate>
-                    <stop offset="0%" stop-color="rgba(255, 0, 255, 1)"></stop>
-                    <stop offset="100%" stop-color="rgba(255, 0, 255, 0)"></stop>
-                </radialGradient>
-                <radialGradient id="Gradient2" cx="50%" cy="50%" fx="2.68147%" fy="50%" r=".5">
-                    <animate attributeName="fx" dur="23.5s" values="0%;3%;0%" repeatCount="indefinite"></animate>
-                    <stop offset="0%" stop-color="rgba(255, 255, 0, 1)"></stop>
-                    <stop offset="100%" stop-color="rgba(255, 255, 0, 0)"></stop>
-                </radialGradient>
-                <radialGradient id="Gradient3" cx="50%" cy="50%" fx="0.836536%" fy="50%" r=".5">
-                    <animate attributeName="fx" dur="21.5s" values="0%;3%;0%" repeatCount="indefinite"></animate>
-                    <stop offset="0%" stop-color="rgba(0, 255, 255, 1)"></stop>
-                    <stop offset="100%" stop-color="rgba(0, 255, 255, 0)"></stop>
-                </radialGradient>
-                <radialGradient id="Gradient4" cx="50%" cy="50%" fx="4.56417%" fy="50%" r=".5">
-                    <animate attributeName="fx" dur="23s" values="0%;5%;0%" repeatCount="indefinite"></animate>
-                    <stop offset="0%" stop-color="rgba(0, 255, 0, 1)"></stop>
-                    <stop offset="100%" stop-color="rgba(0, 255, 0, 0)"></stop>
-                </radialGradient>
-                <radialGradient id="Gradient5" cx="50%" cy="50%" fx="2.65405%" fy="50%" r=".5">
-                    <animate attributeName="fx" dur="24.5s" values="0%;5%;0%" repeatCount="indefinite"></animate>
-                    <stop offset="0%" stop-color="rgba(0,0,255, 1)"></stop>
-                    <stop offset="100%" stop-color="rgba(0,0,255, 0)"></stop>
-                </radialGradient>
-                <radialGradient id="Gradient6" cx="50%" cy="50%" fx="0.981338%" fy="50%" r=".5">
-                    <animate attributeName="fx" dur="25.5s" values="0%;5%;0%" repeatCount="indefinite"></animate>
-                    <stop offset="0%" stop-color="rgba(255,0,0, 1)"></stop>
-                    <stop offset="100%" stop-color="rgba(255,0,0, 0)"></stop>
-                </radialGradient>
-            </defs>
-        <rect x="13.744%" y="1.18473%" width="100%" height="100%" fill="url(#Gradient1)"
-            transform="rotate(334.41 50 50)">
-            <animate attributeName="x" dur="20s" values="25%;0%;25%" repeatCount="indefinite"></animate>
-            <animate attributeName="y" dur="21s" values="0%;25%;0%" repeatCount="indefinite"></animate>
-            <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="7s"
-                repeatCount="indefinite"></animateTransform>
-        </rect>
-        <rect x="-2.17916%" y="35.4267%" width="100%" height="100%" fill="url(#Gradient2)"
-            transform="rotate(255.072 50 50)">
-            <animate attributeName="x" dur="23s" values="-25%;0%;-25%" repeatCount="indefinite"></animate>
-            <animate attributeName="y" dur="24s" values="0%;50%;0%" repeatCount="indefinite"></animate>
-            <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="12s"
-                repeatCount="indefinite"></animateTransform>
-        </rect>
-        <rect x="9.00483%" y="14.5733%" width="100%" height="100%" fill="url(#Gradient3)"
-            transform="rotate(139.903 50 50)">
-            <animate attributeName="x" dur="25s" values="0%;25%;0%" repeatCount="indefinite"></animate>
-            <animate attributeName="y" dur="12s" values="0%;25%;0%" repeatCount="indefinite"></animate>
-            <animateTransform attributeName="transform" type="rotate" from="360 50 50" to="0 50 50" dur="9s"
-                repeatCount="indefinite"></animateTransform>
-        </rect>
-    </svg>
-</div>
-<img src="/workadventure-lmg-logo.png" alt="Workadventure LMG" class="index-logo">
-<button ref="button" class="play-button" @click="openGame">JETZT SPIELEN</button>
-<Footer /></template>
+    <div ref="landing" class="index-landing">
+        <AnimatedBG id="bg-wrap" class="index-bg" />
+        <img src="/workadventure-lmg-animated-logo.png" alt="Workadventure LMG" class="index-logo">
+        <button class="play-button" @click="openGame">JETZT SPIELEN</button>
+    </div>
+    <ScrollingAnim class="index-scrolling-anim" :style="`display: ${displayScrollingAnim}`" />
+    <PageFooter />
+</template>
 
 <script lang="ts" setup>
 import '~/assets/index.sass'
 
-const bg = ref(null);
-const button = ref(null);
+const landing = ref();
+const displayScrollingAnim = ref('none');
 
 onMounted(() => {
     window.addEventListener('scroll', () => {
         const html = document.documentElement;
         const scrollTop = html.scrollTop;
 
-        const reduction = 100;
-
         console.warn(scrollTop);
 
-        if(scrollTop > 0) {
-            bg.value.style.opacity = 0;
-            button.value.style.opacity = 0;
+        if (scrollTop > 0) {
+            landing.value.style.opacity = 0;
+            displayScrollingAnim.value = 'flex';
         } else {
-            bg.value.style.opacity = 1;
-            button.value.style.opacity = 1;
+            landing.value.style.opacity = 1;
+            displayScrollingAnim.value = 'none';
         }
     });
 });
 
 function openGame() {
     window.location.href = 'https://play.workadventure-lmg.de/'
+}
+
+function getScrollTop() {
+    return document.documentElement.scrollTop;
 }
 
 </script>

@@ -2,13 +2,25 @@ body, html
     margin: 0
     border: 0
     height: 500vh
-    background: #CECECE
+    background: #fff
+
+.index-landing
+    transition: all 1s
 
 .index-bg
-    position: relative
-    top: 0
-    left: 0
-    transition: all 1s
+    position: fixed
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    height: 100vh
+    width: 100vw
+    transition: opacity 1s
+
+    svg
+        position: absolute
+        top: 50%
+        transform: translateY(-50%)
+        filter: blur(10px)
 
 .index-logo
     position: fixed
@@ -43,3 +55,5 @@ body, html
     border: 2px solid #fff
     color: #fff
      
+.index-scrolling-anim
+    transition: all 1s

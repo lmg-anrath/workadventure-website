@@ -8,12 +8,15 @@ body, html
     color: $nav-textcolor
 
 .navbar
+    position: fixed
     width: 100vw
     height: 80px
     background: $nav-background
     display: flex
     justify-content: center
     align-items: center
+    backdrop-filter: blur(10px)
+    z-index: 2
         
     .navbar-logo
         width: 240px
@@ -26,10 +29,12 @@ body, html
     left: 0
     width: calc(100vw - 20px)
     height: fit-content
-    padding: 10px
-    background: $nav-background
     display: inline-grid
     grid-template-columns: 50% 50%
+    padding: 10px
+    background: $nav-background
+    backdrop-filter: blur(10px)
+    z-index: 1
 
     .footer-links
         grid-row: 1

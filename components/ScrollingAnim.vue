@@ -9,9 +9,9 @@
 
   var reachedColorChange = false;
 
-  const frameCount = 70; //148
+  const frameCount = 35; //148
   const currentFrame = function(index:number) {
-    return `/macbook/${index.toString().padStart(4, '0')}.png`
+    return `/macbook2/${index.toString().padStart(4, '0')}.png`
     return `https://www.apple.com/105/media/us/airpods-pro/2019/1299e2f5_9206_4470_b28e_08307a42f19b/anim/sequence/large/01-hero-lightpass/${index.toString().padStart(4, '0')}.jpg`
   };
 
@@ -55,9 +55,10 @@
 
       requestAnimationFrame(() =>
         updateImage(frameIndex + 1))
-
-      preloadImages();
-    });
+        
+      });
+    
+    preloadImages();
   });
 </script>
 
@@ -67,7 +68,7 @@ canvas
   left: 50%
   top: 50%
   max-height: 100vh
-  max-width: 100vw
+  width: 100vw
   transform: translate(-50%, -50%)
 </style>
 
