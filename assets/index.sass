@@ -1,59 +1,81 @@
+@font-face
+    font-family: 'FOT-SlumpStd-DB'
+    src: url('/fonts/FOT-SlumpStd-DB.otf')
+
 body, html
+    position: relative
     margin: 0
     border: 0
-    height: 500vh
-    background: #fff
+    background: #0d1117
+    display: flex
+    flex-direction: column
+    min-height: 100vh
 
 .index-landing
-    transition: all 1s
-
-.index-bg
-    position: fixed
-    top: 50%
-    left: 50%
-    transform: translate(-50%, -50%)
-    height: 100vh
-    width: 100vw
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    aspect-ratio: 1
     transition: opacity 1s
 
-    svg
-        position: absolute
-        top: 50%
-        transform: translateY(-50%)
-        filter: blur(10px)
+    .index-bg
+        position: inherit
+        top: 0
+        left: 50%
+        transform: translateX(-50%)
+        width: 100%
+        aspect-ratio: 1
+        transition: opacity 1s
 
-.index-logo
-    position: fixed
-    top: 50%
-    left: 50%
-    transform: translate(-50%, -50%)
-    max-width: 90vw
+        svg
+            position: inherit
+            top: 50%
+            transform: translateY(-50%)
+            filter: blur(10px)
 
-.play-button
-    position: fixed
-    top: 70vh
+    .index-logo
+        position: inherit
+        top: 50vw
+        left: 50%
+        transform: translate(-50%, -50%)
+        max-width: 90vw
+        filter: drop-shadow(0.35rem 0.35rem 0.4rem #fffa)
+
+    .index-play-button
+        position: inherit
+        top: 70vw
+        left: 50%
+        transform: translateX(-50%)
+        border: 2px solid #aaa
+        outline: none
+        font-family: 'FOT-SlumpStd-DB', 'Ubuntu', sans-serif
+        font-size: 1.5em
+        padding: 0 10px 0 10px
+        border-radius: 30px
+        background: #fffa
+        backdrop-filter: blur(5px)
+        color: #140950
+        transition: opacity 1s
+
+    .index-play-button:hover
+        $opacity: 0.5
+        background: rgb(22,56,128)
+        background: linear-gradient(35deg, rgba(22,56,128,$opacity) 0%, rgba(72,77,207,$opacity) 20%, rgba(140,48,173,1) 40%, rgba(218,42,117,$opacity) 60%, rgba(255,120,64,$opacity) 80%, rgba(254,154,58,$opacity) 100%)
+        opacity: 100%
+        -moz-backface-visibility: 50%
+        border: 2px solid #fff
+        color: #fff
+
+    .index-button-lower
+        top: 75vw
+
+.index-spacer
+    position: absolute
+    top: 305vh
     left: 50%
     transform: translateX(-50%)
-    border: 2px solid #aaa
-    outline: none
-    font-family: 'Ubuntu', sans-serif
-    font-weight: 600
-    font-size: 1.5em
-    padding: 5px 10px 5px 10px
-    border-radius: 20px
-    background: #fffa
-    backdrop-filter: blur(5px)
-    color: #222
-    transition: all 1s
-    
-.play-button:hover
-    $opacity: 0.5
-    background: rgb(22,56,128)
-    background: linear-gradient(35deg, rgba(22,56,128,$opacity) 0%, rgba(72,77,207,$opacity) 20%, rgba(140,48,173,1) 40%, rgba(218,42,117,$opacity) 60%, rgba(255,120,64,$opacity) 80%, rgba(254,154,58,$opacity) 100%)
-    opacity: 100%
-    -moz-backface-visibility: 50%
-    border: 2px solid #fff
-    color: #fff
-     
-.index-scrolling-anim
-    transition: all 1s
+    width: 90vw
+    height: 5px
+    background: #555
+    border-radius: 10px

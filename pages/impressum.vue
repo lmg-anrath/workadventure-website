@@ -27,5 +27,5 @@
 </template>
 
 <script lang="ts" setup>
-  import '@/assets/impressum.sass'
+  import '~/assets/impressum.sass';
 </script>

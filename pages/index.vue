@@ -2,42 +2,31 @@
     <Navbar />
     <div ref="landing" class="index-landing">
         <AnimatedBG id="bg-wrap" class="index-bg" />
-        <img src="/workadventure-lmg-animated-logo.png" alt="Workadventure LMG" class="index-logo">
-        <button class="play-button" @click="openGame">JETZT SPIELEN</button>
+        <img src="~/assets/img/workadventure-lmg-animated-logo.png" alt="Workadventure LMG" class="index-logo">
+        <button class="index-play-button" @click="openGame">Jetzt Spielen</button>
+        <button class="index-play-button index-button-lower" @click="openMap">Karte ansehen</button>
     </div>
-    <ScrollingAnim class="index-scrolling-anim" :style="`display: ${displayScrollingAnim}`" />
-    <PageFooter />
+    <ScrollingAnim />
+    <!-- <div class="index-spacer"></div> -->
+    <InfoDisplay />
+    <div style="height: 440vh;"></div>
+    <div class="footer-wrapper">
+        <PageFooter />
+    </div>
 </template>
 
 <script lang="ts" setup>
 import '~/assets/index.sass'
 
-const landing = ref();
-const displayScrollingAnim = ref('none');
-
-onMounted(() => {
-    window.addEventListener('scroll', () => {
-        const html = document.documentElement;
-        const scrollTop = html.scrollTop;
-
-        console.warn(scrollTop);
-
-        if (scrollTop > 0) {
-            landing.value.style.opacity = 0;
-            displayScrollingAnim.value = 'flex';
-        } else {
-            landing.value.style.opacity = 1;
-            displayScrollingAnim.value = 'none';
-        }
-    });
-});
-
 function openGame() {
     window.location.href = 'https://play.workadventure-lmg.de/'
+}
+
+function openMap() {
+    window.location.href = '/map'
 }
 
 function getScrollTop() {
     return document.documentElement.scrollTop;
 }
-
 </script>
