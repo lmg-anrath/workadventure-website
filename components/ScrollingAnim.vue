@@ -2,21 +2,6 @@
     <div ref="container" class="scroll-container">
         <canvas ref="canvas" class="scroll-canvas"></canvas>
         <div ref="content" class="scroll-content">
-            <div class="scroll-line">
-                <div class="scroll-line-origin"></div>
-                <div class="scroll-line-element"></div>
-            </div>
-            <div class="scroll-text">
-                <h1>Mit WorkAdventure am LMG können Sie das Gymnasium hautnah digital erleben.</h1>
-                <p>
-                    Entdecken Sie das Lise-Meitner-Gymnasium auf völlig neue Weise.
-                    Wir bieten Schülerinnen und Schülern die Möglichkeit, das Schulgebäude auf
-                    eine einzigartige Weise zu erkunden, die an ein Computerspiel erinnert.
-                    In einer faszinierenden zweidimensionalen Umgebung können Teilnehmerinnen und Teilnehmer
-                    das gesamte Schulgelände erkunden, Klassenräume und Fachräume besuchen sowie an
-                    DSGVO-konformen Videokonferenzen teilnehmen.
-                </p>
-            </div>
             <div class="scroll-text-spacer"></div>
         </div>
     </div>
@@ -45,24 +30,26 @@ const preloadImages = () => {
 
 const stickCanvasAtCenter = () => {
     const scrollY = window.scrollY;
-    const containerTop = container.value.offsetTop;
+    const containerTop = container.value.offsetParent.offsetTop;
+    console.log(containerTop);
     const containerHeight = container.value.offsetHeight;
     const canvasHeight = canvas.value.offsetHeight;
     const contentTop = content.value.offsetTop;
     const contentHeight = content.value.offsetHeight;
 
-    if (scrollY + window.innerHeight / 2 >= containerTop + canvasHeight / 2 && scrollY < containerHeight + containerTop - window.innerHeight) {
+    // Stick, if the canvas has reached the center of the screen (vertically)
+    if (scrollY + window.innerHeight / 2 >= containerTop + canvasHeight / 2 && scrollY < containerHeight + containerTop - window.innerHeight / 2 - canvasHeight / 2) {
         canvas.value.style.position = 'fixed';
         canvas.value.style.top = '50%';
-        canvas.value.style.transform = 'translateY(-50%)';
+        canvas.value.style.transform = 'translate(-50%, -50%)';
         content.value.style.opacity = '0';
-    } else if (scrollY > containerHeight + containerTop - window.innerHeight) {
-        canvas.value.style.position = 'inherit';
-        canvas.value.style.top = `${containerHeight - (window.innerHeight / 2 + canvasHeight / 2)}px`;
-        canvas.value.style.transform = '';
+    } else if (scrollY > containerTop + containerHeight - window.innerHeight / 2 - canvasHeight / 2) {
+        canvas.value.style.position = 'absolute';
+        canvas.value.style.top = `${containerHeight - canvasHeight}px`;
+        canvas.value.style.transform = 'translateX(-50%)';
         content.value.style.opacity = '1';
     } else {
-        canvas.value.style.position = 'inherit';
+        canvas.value.style.position = 'absolute';
         canvas.value.style.top = '0';
         canvas.value.style.transform = '';
     }
@@ -96,11 +83,11 @@ onMounted(() => {
     }
 
     window.addEventListener('scroll', () => {
-        var scrollTop = window.scrollY - container.value.offsetTop;
+        var scrollTop = window.scrollY - container.value.offsetParent.offsetTop / 2;
         if (scrollTop < 0) {
             scrollTop = 0;
         }
-        const maxScrollTop = container.value.offsetHeight - window.innerHeight;
+        const maxScrollTop = container.value.offsetHeight - canvas.value.offsetHeight;
         const scrollFraction = scrollTop / maxScrollTop;
         const frameIndex = Math.min(
             frameCount - 1,
@@ -119,18 +106,21 @@ onMounted(() => {
 
 <style lang="sass" scoped>
 .scroll-container
-    position: absolute
-    top: 100vh
+    position: relative
     width: 100%
     height: 200vh
     display: flex
     justify-content: center
-    align-items: center
+    align-items: flex-start
     overflow: hidden
     .scroll-canvas
-        position: inherit
+        position: absolute
         top: 0
+        left: 50%
+        transform: translateX(-50%)
         width: 100%
+        min-width: 300px
+        max-width: 1500px
 
     .scroll-content
         position: inherit
@@ -140,6 +130,7 @@ onMounted(() => {
         opacity: 0
         transition: opacity 0.5s ease-in-out, margin 1s ease-in-out
         display: flex
+        flex-direction: column
 
     .scroll-line
         position: relative

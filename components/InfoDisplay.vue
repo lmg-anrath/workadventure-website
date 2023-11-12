@@ -1,5 +1,22 @@
 <template>
     <div ref="infoList" class="info-list">
+        <div class="info-element primary-info-element">
+            <div class="scroll-line">
+                <div class="scroll-line-origin"></div>
+                <div class="scroll-line-element"></div>
+            </div>
+            <div class="element-wrapper">
+                <h1>Mit WorkAdventure am LMG können Sie das Gymnasium hautnah digital erleben.</h1>
+                <p>
+                    Entdecken Sie das Lise-Meitner-Gymnasium auf völlig neue Weise.
+                    Wir bieten Schülerinnen und Schülern die Möglichkeit, das Schulgebäude auf
+                    eine einzigartige Weise zu erkunden, die an ein Computerspiel erinnert.
+                    In einer faszinierenden zweidimensionalen Umgebung können Teilnehmerinnen und Teilnehmer
+                    das gesamte Schulgelände erkunden, Klassenräume und Fachräume besuchen sowie an
+                    DSGVO-konformen Videokonferenzen teilnehmen.
+                </p>
+            </div>
+        </div>
         <div class="info-element">
             <div class="scroll-line">
                 <div class="scroll-line-element"></div>
@@ -116,8 +133,14 @@ onMounted(() => {
 
 <style lang="sass" scoped>
 .info-list
-  position: absolute
-  top: 300vh
+  position: relative
+
+.primary-info-element
+    color: #fff !important
+
+    .element-wrapper
+        width: 51.5% !important
+
 
 .info-element
   box-sizing: border-box
@@ -131,6 +154,10 @@ onMounted(() => {
   opacity: 0
   transition: opacity .7s cubic-bezier(0.16, 1, 0.3, 1),transform .7s cubic-bezier(0.16, 1, 0.3, 1)
 
+  p
+    max-width: 60vw
+    font-size: 1.2rem
+    line-height: 1.5rem
 
   img
     max-width: 50vw

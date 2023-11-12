@@ -15,6 +15,11 @@
       <p>&copy; 2023 LMG Anrath, Fabian Sölle, Mika Rottländer<br>
           Alle Rechte vorbehalten.</p>
     </div>
+    <div class="footer-usk">
+      <a href="https://usk.de/fuer-unternehmen/spiele-und-apps-pruefen-lassen/lehr-infoprogramme/">
+        <img src="~/assets/img/usk.png" alt="Lernprogramm gemäß § 14 Jugendschutzgesetz">
+      </a>
+    </div>
   </div>
 </template>
 

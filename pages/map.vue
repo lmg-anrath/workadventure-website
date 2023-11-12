@@ -12,6 +12,11 @@
     const mapsvg = ref();
 
     const route = useRoute();
+
+    definePageMeta({
+        layout: 'empty',
+    });
+
     onMounted(() => {
         const posX = route.query.x as string;
         const posY = route.query.y as string;

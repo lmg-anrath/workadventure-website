@@ -1,23 +1,107 @@
-@font-face
-    font-family: 'FOT-SlumpStd-DB'
-    src: url('/fonts/FOT-SlumpStd-DB.otf')
+.main-content
+    overflow: hidden
 
-body, html
-    position: relative
-    margin: 0
-    border: 0
-    background: #0d1117
-    display: flex
-    flex-direction: column
-    min-height: 100vh
+    .index-play
+        position: relative
+        //padding-top: 50px
+        display: block
+        box-sizing: border-box
 
-.index-landing
-    position: absolute
-    top: 0
-    left: 0
-    width: 100%
-    aspect-ratio: 1
-    transition: opacity 1s
+        .index-play-section
+            margin: 0 auto
+            padding: 0
+            padding-top: 0
+            height: 90vh
+            min-height: 600px
+            max-width: 2600px
+            max-height: 1050px
+            display: flex
+            justify-content: center
+            flex-direction: column
+            position: relative
+            z-index: 1
+            align-items: center
+
+            .index-play-bg
+                box-sizing: border-box
+
+                video
+                    position: absolute
+                    top: 0
+                    left: 0
+                    width: 100%
+                    height: 100%
+                    object-fit: cover
+                    display: block
+                    z-index: -1
+
+            .index-play-content
+                align-items: center
+                display: flex
+                box-sizing: border-box
+
+                .index-play-wrapper
+                    flex-direction: column
+                    gap: 10px
+                    align-items: center
+                    display: flex
+
+                    img
+                        display: block
+                        height: 100%
+                        max-height: 100%
+                        max-width: 100%
+                        object-fit: inherit
+                        width: 100%
+
+                    h2
+                        font-family: 'FOT-SlumpStd-DB', sans-serif
+                        font-style: italic
+
+                    button
+                        border: 2px solid #aaa
+                        outline: none
+                        border-radius: 30px
+                        padding: 0 10px 0 10px
+                        font-family: 'FOT-SlumpStd-DB', 'Ubuntu', sans-serif
+                        font-size: 1.2em
+                        color: #140950
+                        background: #fffa
+                        backdrop-filter: blur(5px)
+
+                    button:hover
+                        $opacity: 0.5
+                        background: rgb(22,56,128)
+                        background: linear-gradient(35deg, rgba(22,56,128,$opacity) 0%, rgba(72,77,207,$opacity) 20%, rgba(140,48,173,1) 40%, rgba(218,42,117,$opacity) 60%, rgba(255,120,64,$opacity) 80%, rgba(254,154,58,$opacity) 100%)
+                        background-size: 200% auto
+                        animation: scrollBackground 5s linear infinite
+                        opacity: 100%
+                        -moz-backface-visibility: 50%
+                        border: 2px solid #fff
+                        color: #fff
+
+                        @keyframes scrollBackground
+                            0%
+                                background-position: 0 50%
+                            100%
+                                background-position: 100% 50%
+
+                    .index-play-platforms
+                        margin-top: 10px
+                        display: flex
+                        gap: 30px
+                        flex-direction: row
+    
+    .index-content
+        position: relative
+
+    .index-landing
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        aspect-ratio: 1
+        transition: opacity 1s
 
     .index-bg
         position: inherit
