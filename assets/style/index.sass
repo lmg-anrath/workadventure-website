@@ -56,6 +56,7 @@
 
                     h2
                         font-family: 'FOT-SlumpStd-DB', sans-serif
+                        font-size: 1.5rem
                         font-style: italic
 
                     button
@@ -94,6 +95,50 @@
     
     .index-content
         position: relative
+
+        .index-content-heading
+            width: 60%
+            position: absolute
+            top: 5vh
+            left: 50%
+            transform: translateX(-50%)
+            font-family: 'Ubuntu', sans-serif
+            font-size: 3em
+            color: #fff
+            text-align: center
+            text-decoration: underline
+            text-decoration-thickness: 0.1em
+            text-underline-offset: 0.2em
+            margin: 0
+            padding: 15px 10px
+            background: transparent
+            border-radius: 30px
+            backdrop-filter: blur(10px)
+            z-index: 1
+            cursor: pointer
+            //box-shadow: 0 10px 30px rgba(250, 231, 62, 0.7), 0 0 60px rgba(122, 250, 62, 0.3), 0 0 90px rgba(250, 231, 62, 0.5)
+
+        .index-content-bg-image
+            position: absolute
+            aspect-ratio: 1
+            filter: brightness(0.7)
+            z-index: -3
+
+        .index-content-bg-image-first
+            top: 20vh
+            right: -400px
+
+        .index-content-bg-image-second
+            top: 100vh
+            left: -400px
+
+        .index-content-bg-image-third
+            top: 210vh
+            right: -200px
+
+        .index-content-bg-image-fourth
+            top: 320vh
+            left: -200px
 
     .index-landing
         position: absolute

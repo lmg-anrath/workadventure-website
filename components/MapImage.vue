@@ -1715,7 +1715,7 @@
     </g>
   </svg>
   <svg
-    v-if="floor==='OG'"
+    v-if="floor === 'OG'"
     xmlns="http://www.w3.org/2000/svg"
     xml:space="preserve"
     width="6201"
@@ -3167,9 +3167,9 @@
 </template>
 
 <script lang="ts" setup>
-import '~/assets/mapimage.sass'
+import "~/assets/style/mapimage.sass";
 
 const props = defineProps({
-    floor: String,
+  floor: String,
 });
 </script>

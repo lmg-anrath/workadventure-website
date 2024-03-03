@@ -1,0 +1,128 @@
+.map-page
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    font-family: 'Ubuntu', sans-serif
+    text-align: center
+    color: #2c3e50
+    background: radial-gradient(#082b36, #07011a)
+    overflow: hidden
+    user-select: none
+
+    .map-header
+        position: absolute
+        width: 100vw
+        height: 120px
+        border-bottom-right-radius: 30px
+        border-bottom-left-radius: 30px
+        text-align: center
+        color: #fff
+        background: #0005
+        backdrop-filter: blur(10px)
+        cursor: default
+        z-index: 2
+
+        .map-back-button
+            position: absolute
+            top: 20px
+            left: 20px
+            width: 50px
+            height: 50px
+            border: none
+            outline: none
+            background: #000
+            border-radius: 15px
+            cursor: pointer
+            transition: 0.3s ease
+
+            img
+                width: 90%
+                height: 90%
+                position: absolute
+                top: 50%
+                left: 50%
+                transform: translate(-50%, -50%)
+
+            &:hover
+                filter: invert(1)
+
+    h1
+        font-family: 'FOT-SlumpStd-DB', serif
+        margin-top: 0
+
+    .map-switch
+        position: absolute
+        top: 140px
+        left: 20px
+        width: 50px
+        border-radius: 15px
+        background: #5555
+        backdrop-filter: blur(10px)
+        cursor: pointer
+        z-index: 2
+
+        .map-switch-element
+            height: 40px
+            width: 100%
+            color: #fff
+            line-height: 40px
+
+            &:hover
+                background: #fffa
+                color: #000
+
+        .map-switch-element-top
+            border-top-right-radius: 15px
+            border-top-left-radius: 15px
+
+        .map-switch-element-bottom
+            border-bottom-right-radius: 15px
+            border-bottom-left-radius: 15px
+
+        .map-switch-active
+            background: #0f0a
+
+    .map-reset-view
+        position: absolute
+        width: 50px
+        height: 50px
+        bottom: 20px
+        left: 20px
+        border-radius: 15px
+        background: #5555
+        backdrop-filter: blur(10px)
+        cursor: pointer
+        z-index: 2
+
+        &:hover
+            background: #fffa
+            color: #000
+
+    .map-view
+        width: 6200px
+        height: 4250px
+        cursor: grab
+
+        .map-marker
+            position: absolute
+            width: 150px
+            height: 150px
+            display: flex
+            justify-content: center
+            align-items: center
+            z-index: 1
+
+            .map-marker-dropshadow
+                position: inherit
+                top: 110px
+                background: radial-gradient(#13131377 70%, transparent)
+                filter: blur(5px)
+                width: 100px
+                height: 30px
+                border-radius: 50%
+                z-index: 2
+
+                .map-marker-icon
+                    z-index: 3
