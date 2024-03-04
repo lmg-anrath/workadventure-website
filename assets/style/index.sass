@@ -43,8 +43,9 @@
                 .index-play-wrapper
                     flex-direction: column
                     gap: 10px
-                    align-items: center
                     display: flex
+                    align-items: center
+                    justify-content: center
 
                     img
                         display: block
@@ -58,52 +59,54 @@
                         font-family: 'FOT-SlumpStd-DB', sans-serif
                         font-size: 1.5rem
                         font-style: italic
+                        text-align: center
 
-                    button
-                        border: 2px solid #aaa
-                        outline: none
-                        border-radius: 30px
-                        padding: 0 10px 0 10px
-                        font-family: 'FOT-SlumpStd-DB', 'Ubuntu', sans-serif
-                        font-size: 1.2em
-                        color: #140950
-                        background: #fffa
-                        backdrop-filter: blur(5px)
-
-                    button:hover
-                        $opacity: 0.5
-                        background: rgb(22,56,128)
-                        background: linear-gradient(35deg, rgba(22,56,128,$opacity) 0%, rgba(72,77,207,$opacity) 20%, rgba(140,48,173,1) 40%, rgba(218,42,117,$opacity) 60%, rgba(255,120,64,$opacity) 80%, rgba(254,154,58,$opacity) 100%)
-                        background-size: 200% auto
-                        animation: scrollBackground 5s linear infinite
-                        opacity: 100%
-                        -moz-backface-visibility: 50%
-                        border: 2px solid #fff
+                    .index-action-button
+                        background-color: transparent
+                        width: min(50vw, 400px)
                         color: #fff
+                        border: 2px solid #fff
+                        padding: 10px min(100px, 10vw)
+                        border-radius: 10px
+                        font-family: "Ubuntu", sans-serif
+                        font-weight: 800
+                        font-size: 1.5rem
+                        text-align: center
+                        cursor: pointer
+                        transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1)
 
-                        @keyframes scrollBackground
-                            0%
-                                background-position: 0 50%
-                            100%
-                                background-position: 100% 50%
+                        &:hover
+                            filter: invert(1)
+                            background-color: #0003
+
+                    .index-open-map
+                        font-family: "Ubuntu", sans-serif
+                        font-size: 1.2rem
+                        text-decoration: underline
+                        text-decoration-thickness: 0.15em
+                        cursor: pointer
+                        transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1)
+                        
+                        &:hover
+                            filter: invert(1)
 
                     .index-play-platforms
                         margin-top: 10px
                         display: flex
                         gap: 30px
                         flex-direction: row
-    
+
     .index-content
         position: relative
 
         .index-content-heading
-            width: 60%
+            width: max(60%, 500px)
             position: absolute
             top: 5vh
             left: 50%
             transform: translateX(-50%)
             font-family: 'Ubuntu', sans-serif
-            font-size: 3em
+            font-size: 3rem
             color: #fff
             text-align: center
             text-decoration: underline
@@ -121,24 +124,25 @@
         .index-content-bg-image
             position: absolute
             aspect-ratio: 1
+            width: 100vw
             filter: brightness(0.7)
             z-index: -3
 
         .index-content-bg-image-first
             top: 20vh
-            right: -400px
+            right: -50vw
 
         .index-content-bg-image-second
             top: 100vh
-            left: -400px
+            left: -50vw
 
         .index-content-bg-image-third
             top: 210vh
-            right: -200px
+            right: -25vw
 
         .index-content-bg-image-fourth
             top: 320vh
-            left: -200px
+            left: -25vw
 
     .index-landing
         position: absolute

@@ -12,8 +12,10 @@
               alt="WorkAdventureLMG Logo"
             />
             <h2>Das LMG digital erkunden.</h2>
-            <button @click="openGame">JETZT SPIELEN</button>
-            <button @click="openMap">KARTE ÖFFNEN</button>
+            <button class="index-action-button" @click="openGame">
+              JETZT SPIELEN
+            </button>
+            <a class="index-open-map" @click="openMap">Karte öffnen ></a>
             <div class="index-play-platforms">
               <img src="~/assets/svg/edge-icon.svg" alt="Edge Browser" />
               <img src="~/assets/svg/safari-icon.svg" alt="Safari Browser" />

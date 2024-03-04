@@ -1,26 +1,25 @@
 <template>
   <div class="map-page">
     <div class="map-header">
-      <button
-        v-if="!isIngame"
-        @click="() => $router.back()"
-        class="map-back-button"
-      >
-        <img
-          src="~/assets/svg/map-arrow-circle-left.svg"
-          alt="Zurück"
-          width="50"
-          height="50"
-        />
-      </button>
-      <h1>
-        Karte des
-        <nuxt-link
-          to="/map?x=1100&y=1100&map=OG"
-          style="color: #fff; text-decoration: none; cursor: default"
-          >LMG</nuxt-link
+      <div class="map-header-top-bar">
+        <button
+          v-if="!isIngame"
+          @click="() => $router.back()"
+          @touchend="() => $router.back()"
+          class="map-back-button"
         >
-      </h1>
+          <img
+            src="~/assets/svg/map-arrow-circle-left.svg"
+            alt="Zurück"
+            width="50"
+            height="50"
+          />
+        </button>
+        <h1>
+          Karte des
+          <span @click="devMode">LMG</span>
+        </h1>
+      </div>
       <h3>
         Hier können Sie die Karte der Schule
         <span v-if="isIngame">und Ihre Position in dieser</span> sehen.
@@ -59,6 +58,7 @@
       ref="mapsvg"
       class="map-view"
       :style="{ cursor: isPanning ? 'grabbing' : 'grab' }"
+      @contextmenu.prevent="placeMarker"
     >
       <div
         v-if="isIngame"
@@ -91,11 +91,14 @@ import panzoom from "panzoom";
 import "~/assets/style/style.sass";
 import "~/assets/style/map.sass";
 
+import mapCoords from "~/assets/maps.json";
+
 const pan = ref();
 const cursorPos = ref({ x: 0, y: 0, floor: "" });
 const floor = ref("EG");
 const isIngame = ref(false);
 const isPanning = ref(false);
+const isDev = ref(false);
 const mapsvg = ref();
 
 const route = useRoute();
@@ -107,22 +110,26 @@ definePageMeta({
 onMounted(() => {
   const posX = route.query.x as string;
   const posY = route.query.y as string;
-  const map = route.query.map as string;
+  const map: String = route.query.map as string;
 
   if (posX && posY && map) {
     isIngame.value = true;
+
     cursorPos.value.x = parseInt(posX) - 75; // Place cursor center at coordinates
     cursorPos.value.y = parseInt(posY) - 75;
 
-    switch (map) {
-      case "OG":
-        floor.value = "OG";
-        cursorPos.value.floor = "OG";
-        break;
-      default:
-        floor.value = "EG";
-        cursorPos.value.floor = "EG";
+    const currentMap = mapCoords.find((item) => item.id === map);
+
+    if (!currentMap) {
+      console.error("Map not found");
+      return;
     }
+    console.log(currentMap);
+
+    cursorPos.value.x = currentMap.x;
+    cursorPos.value.y = currentMap.y;
+
+    cursorPos.value.floor = currentMap.id.split("_")[1] === "eg" ? "EG" : "OG";
   }
 
   pan.value = panzoom(mapsvg.value, {
@@ -171,5 +178,29 @@ function resetViewport() {
     centerY - cursorPos.value.y * mapSRT.scale
   );
   console.error(pan.value.getTransform());
+}
+
+function placeMarker(event: { x: any; y: any }) {
+  if (!isDev.value) return;
+
+  const mapSRT = pan.value.getTransform();
+  const clickX = event.x;
+  const clickY = event.y;
+
+  // Convert the click coordinates to panzoom coordinates
+  const panzoomX = (clickX - mapSRT.x) / mapSRT.scale - 75;
+  const panzoomY = (clickY - mapSRT.y) / mapSRT.scale - 75;
+
+  cursorPos.value.x = panzoomX;
+  cursorPos.value.y = panzoomY;
+
+  console.warn(
+    `Placed marker at (${panzoomX}, ${panzoomY}) on floor ${floor.value}`
+  );
+}
+
+function devMode() {
+  isDev.value = !isDev.value;
+  navigateTo("/map?x=1100&y=1100&map=sek1_eg_201");
 }
 </script>
